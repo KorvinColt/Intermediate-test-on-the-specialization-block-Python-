@@ -80,3 +80,40 @@ class NotesApp:
         self.notes = [note for note in self.notes if note['id'] != note_id]
         self.save_notes()
         print(f"Заметка с ID {note_id} успешно удалена.")
+
+if __name__ == "__main__":
+    app = NotesApp()
+
+    while True:
+        print("\nВыберите команду:")
+        print("1. Добавить заметку")
+        print("2. Список заметок")
+        print("3. Прочитать заметку по ID")
+        print("4. Редактировать заметку по ID")
+        print("5. Удалить заметку по ID")
+        print("6. Выйти")
+
+        choice = input("Введите номер команды: ")
+
+        if choice == '1':
+            title = input("Введите заголовок заметки: ")
+            message = input("Введите тело заметки: ")
+            app.add_note(title, message)
+        elif choice == '2':
+            app.list_notes()
+        elif choice == '3':
+            note_id = int(input("Введите ID заметки для чтения: "))
+            app.read_note_by_id(note_id)
+        elif choice == '4':
+            note_id = int(input("Введите ID заметки для редактирования: "))
+            new_title = input("Введите новый заголовок заметки: ")
+            new_message = input("Введите новое тело заметки: ")
+            app.edit_note_by_id(note_id, new_title, new_message)
+        elif choice == '5':
+            note_id = int(input("Введите ID заметки для удаления: "))
+            app.delete_note_by_id(note_id)
+        elif choice == '6':
+            print("Выход из программы.")
+            break
+        else:
+            print("Некорректная команда. Пожалуйста, выберите существующую команду.")
